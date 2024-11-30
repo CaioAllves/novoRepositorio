@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .btn {
+            margin-bottom: 1em;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+
+</head>
+<body>
+    <form action="{% url 'salvar' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="nomeTarefa">
+        <input type="number" name="custo">
+        <input type="date" name="dataLimite">
+        <button type="submit" class="btn">Enviar</button>
+    </form>
+    {% if error_message %}
+        <div style="color: red;">
+            <p><strong>{{ error_message }}</strong></p>
+        </div>
+    {% endif %}
+    <a  href="{% url 'pagInicial' %}" class="btn">Pagina inicial</a>
+</body>
+</html>

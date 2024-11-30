@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .btn {
+            margin-bottom: 1em;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .btnEditar {    
+            margin-bottom: 1em;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0be6db;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btnExcluir {
+            margin-bottom: 1em;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #a83b33;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+
+</head>
+<body>
+    <ul>
+        {% for tarefa in tarefas %}
+            {% if tarefa.custo < 1000 %}
+                <li style="margin-bottom: 1em;"> 
+                    ORDEM {{tarefa.ordemApresentacao}} - {{tarefa.id}} - {{tarefa.nomeTarefa}} - {{tarefa.custo}} - {{tarefa.dataLimite}} 
+                    - <a href="{% url 'edit' tarefa.id %}" class="btnEditar">Editar</a> 
+                    - <a href="{% url 'delete' tarefa.id %} " onclick="return confirm('Deseja deletar esta tarefa?');" class="btnExcluir">Excluir</a>
+                    - <a href="{% url 'subir' tarefa.ordemApresentacao %}" class="btn">Subir</a>
+                    - <a href="{% url 'descer' tarefa.ordemApresentacao %}" class="btn">Descer</a>
+                </li>
+            {% else %}
+                <li style="background-color: yellow;margin-bottom: 1em">
+                    ORDEM {{tarefa.ordemApresentacao}} - {{tarefa.id}} - {{tarefa.nomeTarefa}} - {{tarefa.custo}} - {{tarefa.dataLimite}} 
+                    - <a href="{% url 'edit' tarefa.id %}" class="btnEditar">Editar</a> 
+                    - <a href="{% url 'delete' tarefa.id %} " onclick="return confirm('Deseja deletar esta tarefa?');" class="btnExcluir">Excluir</a>
+                    - <a href="{% url 'subir' tarefa.ordemApresentacao %}" class="btn">Subir</a>
+                    - <a href="{% url 'descer' tarefa.ordemApresentacao %}" class="btn">Descer</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <a  href="{% url 'incluir' %}" class="btn">Incluir</a>
+</body>
+</html>
